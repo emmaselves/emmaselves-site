@@ -161,13 +161,38 @@ export default function EmmasElvesSite() {
           <div className="rounded-3xl border p-6 shadow-sm">
             <h3 className="font-medium">Mail‑in / Contact</h3>
             <p className="mt-2 text-sm text-zinc-600">Email <span className="font-medium">emmaselves@gmail.com</span> or text <span className="font-medium">631‑804‑2998</span> to coordinate a donation or pickup.</p>
-            <form onSubmit={(e)=> e.preventDefault()} className="mt-4 grid gap-3 text-sm">
-              <input className="border rounded-xl px-3 py-2" placeholder="Your name" />
-              <input className="border rounded-xl px-3 py-2" placeholder="Email" type="email" />
-              <textarea className="border rounded-xl px-3 py-2 min-h-[100px]" placeholder="How would you like to help?" />
-              <button className="px-4 py-2 rounded-2xl bg-zinc-900 text-white hover:bg-zinc-800">Send</button>
-              <p className="text-xs text-zinc-500">(Form is a demo — wire up to your email or Airtable later.)</p>
-            </form>
+            <form
+  action="https://formspree.io/f/xpwyvzbk"
+  method="POST"
+  className="mt-4 grid gap-3 text-sm"
+>
+  <input
+    name="name"
+    required
+    className="border rounded-xl px-3 py-2"
+    placeholder="Your name"
+  />
+  <input
+    type="email"
+    name="email"
+    required
+    className="border rounded-xl px-3 py-2"
+    placeholder="Email"
+  />
+  <textarea
+    name="message"
+    required
+    className="border rounded-xl px-3 py-2 min-h-[100px]"
+    placeholder="How would you like to help?"
+  />
+  <button
+    type="submit"
+    className="rounded-2xl bg-zinc-900 text-white hover:bg-zinc-800 px-5 py-2"
+  >
+    Send
+  </button>
+</form>
+
           </div>
         </div>
       </section>
