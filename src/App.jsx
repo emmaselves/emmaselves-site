@@ -101,34 +101,125 @@ export default function EmmasElvesSite() {
         </div>
       </section>
 
-      {/* Events */}
-      <section id="event" className="border-t">
-        <div className="max-w-6xl mx-auto px-4 py-16">
-          <h2 className="text-2xl font-semibold">Events</h2>
-          <div className="mt-6 grid md:grid-cols-2 gap-6">
-            <article className="rounded-3xl border p-6 shadow-sm">
-              <h3 className="font-medium">Annual Holiday Toy Drive Celebration</h3>
-              <p className="mt-2 text-sm text-zinc-600">Private hall • Live band + DJ • Raffles</p>
-              <p className="mt-3 text-zinc-700">Join us for an evening of music, community, and giving. Your ticket helps fund gifts for local families.</p>
-              <div className="mt-4 flex flex-wrap gap-3 text-sm">
-                <span className="inline-flex items-center rounded-full border px-3 py-1">Open bar option</span>
-                <span className="inline-flex items-center rounded-full border px-3 py-1">Food included</span>
-              </div>
-              <div className="mt-5">
-                <a href="#contact" className="px-4 py-2 rounded-2xl bg-zinc-900 text-white text-sm hover:bg-zinc-800">Request details</a>
-              </div>
-            </article>
-            <article className="rounded-3xl border p-6 shadow-sm">
-              <h3 className="font-medium">Community Drop‑Offs</h3>
-              <p className="mt-2 text-sm text-zinc-600">Local schools & partner businesses</p>
-              <p className="mt-3 text-zinc-700">Bring a new, unwrapped toy or gift card to one of our partner locations. We’ll handle sorting and delivery.</p>
-              <div className="mt-5">
-                <a href="#contact" className="px-4 py-2 rounded-2xl border text-sm hover:bg-zinc-50">Become a drop‑off site</a>
-              </div>
-            </article>
+     {/* Events */}
+<section id="event" className="py-16 border-t">
+  <div className="mx-auto max-w-6xl px-4">
+    <header className="mb-8 text-center">
+      <h2 className="text-3xl font-bold tracking-tight">🎁 Emma’s Elves 2025 Celebration</h2>
+      <p className="mt-2 text-zinc-600">
+        Join us for live music, raffles, and holiday cheer! All proceeds fund gifts for local families.
+      </p>
+    </header>
+
+    <div className="grid gap-8 md:grid-cols-2">
+      {/* Flyer (your file is in /public/flyer.png) */}
+      <div>
+        <img
+          src="/flyer.png"
+          alt="Emma’s Elves Event Flyer"
+          className="w-full rounded-3xl border shadow-sm"
+        />
+      </div>
+
+      {/* Details + actions */}
+      <div className="rounded-3xl border p-6 shadow-sm">
+        <dl className="grid grid-cols-1 gap-3 text-sm">
+          <div>
+            <dt className="text-zinc-500">Date</dt>
+            <dd className="font-medium">Friday, November 28, 2025 · 6:30–11:30 PM</dd>
+          </div>
+          <div>
+            <dt className="text-zinc-500">Venue</dt>
+            <dd className="font-medium">
+              Great South Bay Brewery, Bay Shore, NY
+              <a
+                href="https://maps.apple.com/?q=Great+South+Bay+Brewery+Bay+Shore+NY"
+                target="_blank"
+                rel="noreferrer"
+                className="ml-2 text-emerald-700 underline"
+              >
+                Map
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+        {/* Pre-purchase discount note */}
+        <div className="mt-4 rounded-xl bg-emerald-50 p-3 text-emerald-700 text-sm">
+          💡 Pre-purchase online and get <b>$10 off</b>.
+          (At the door: Gold $125 / Silver $80)
+        </div>
+
+        {/* Tickets (Venmo deep links with auto-filled notes) */}
+        <div className="mt-6">
+          <h3 className="text-base font-semibold">Tickets</h3>
+          <div className="mt-3 grid gap-3">
+            {/* GOLD: pre-purchase = 125 - 10 = 115 */}
+            <a
+              href={`https://venmo.com/u/emmas_elves?txn=pay&amount=115&note=${encodeURIComponent("Emma's Elves - Gold Ticket")}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-between rounded-2xl border px-4 py-3 text-sm hover:bg-zinc-50"
+            >
+              <span>Gold – $115 (4-hr open bar, dinner, donation)</span>
+              <span className="rounded-xl bg-zinc-900 px-3 py-1 text-white">Pay via Venmo</span>
+            </a>
+
+            {/* SILVER: pre-purchase = 80 - 10 = 70 */}
+            <a
+              href={`https://venmo.com/u/emmas_elves?txn=pay&amount=70&note=${encodeURIComponent("Emma's Elves - Silver Ticket")}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-between rounded-2xl border px-4 py-3 text-sm hover:bg-zinc-50"
+            >
+              <span>Silver – $70 (soft drinks, dinner, 5 raffle tix, donation)</span>
+              <span className="rounded-xl bg-zinc-900 px-3 py-1 text-white">Pay via Venmo</span>
+            </a>
           </div>
         </div>
-      </section>
+
+        {/* Secondary actions */}
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a
+            href="https://partiful.com/e/DV0hAR57C77cdtNe2OSh"
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-2xl border px-4 py-2 text-sm hover:bg-zinc-50"
+          >
+            View full details on Partiful
+          </a>
+
+          {/* Open donation link (no preset amount) */}
+          <a
+            href={`https://venmo.com/u/emmas_elves?txn=pay&note=${encodeURIComponent("Emma's Elves Donation")}`}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-2xl bg-emerald-600 px-4 py-2 text-sm text-white hover:bg-emerald-700"
+          >
+            Donate via Venmo
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {/* Optional info cards */}
+    <div className="mt-10 grid gap-4 md:grid-cols-3">
+      <div className="rounded-2xl border p-4 text-sm">
+        <h4 className="font-medium">What to expect</h4>
+        <p className="mt-1 text-zinc-600">Live music, raffles, sponsor shoutouts, and lots of holiday cheer.</p>
+      </div>
+      <div className="rounded-2xl border p-4 text-sm">
+        <h4 className="font-medium">Dress code</h4>
+        <p className="mt-1 text-zinc-600">Festive casual / holiday vibes!</p>
+      </div>
+      <div className="rounded-2xl border p-4 text-sm">
+        <h4 className="font-medium">Parking</h4>
+        <p className="mt-1 text-zinc-600">On-site lot and nearby street parking.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* Sponsors */}
       <section id="sponsor" className="border-t">
