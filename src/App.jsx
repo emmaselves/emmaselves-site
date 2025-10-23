@@ -112,7 +112,7 @@ export default function EmmasElvesSite() {
     </header>
 
     <div className="grid gap-8 md:grid-cols-2">
-      {/* Flyer (your file is in /public/flyer.png) */}
+      {/* Flyer (public/flyer.png) */}
       <div>
         <img
           src="/flyer.png"
@@ -121,7 +121,7 @@ export default function EmmasElvesSite() {
         />
       </div>
 
-      {/* Details + actions */}
+      {/* Details + RSVP & Pay */}
       <div className="rounded-3xl border p-6 shadow-sm">
         <dl className="grid grid-cols-1 gap-3 text-sm">
           <div>
@@ -144,39 +144,101 @@ export default function EmmasElvesSite() {
           </div>
         </dl>
 
-        {/* Pre-purchase discount note */}
+        {/* Discount note */}
         <div className="mt-4 rounded-xl bg-emerald-50 p-3 text-emerald-700 text-sm">
-          💡 Pre-purchase online and get <b>$10 off</b>.
-          (At the door: Gold $125 / Silver $80)
+          💡 Pre-purchase online and get <b>$10 off</b>. (At the door: Gold $125 / Silver $80)
         </div>
 
-        {/* Tickets (Venmo deep links with auto-filled notes) */}
-        <div className="mt-6">
-          <h3 className="text-base font-semibold">Tickets</h3>
-          <div className="mt-3 grid gap-3">
-            {/* GOLD: pre-purchase = 125 - 10 = 115 */}
-            <a
-              href={`https://venmo.com/u/emmas_elves?txn=pay&amount=115&note=${encodeURIComponent("Emma's Elves - Gold Ticket")}`}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-between rounded-2xl border px-4 py-3 text-sm hover:bg-zinc-50"
-            >
-              <span>Gold – $115 (4-hr open bar, dinner, donation)</span>
-              <span className="rounded-xl bg-zinc-900 px-3 py-1 text-white">Pay via Venmo</span>
-            </a>
+        {/* RSVP & Pay */}
+<div className="mt-6">
+  <h3 className="text-base font-semibold">RSVP & Pay</h3>
 
-            {/* SILVER: pre-purchase = 80 - 10 = 70 */}
-            <a
-              href={`https://venmo.com/u/emmas_elves?txn=pay&amount=70&note=${encodeURIComponent("Emma's Elves - Silver Ticket")}`}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-between rounded-2xl border px-4 py-3 text-sm hover:bg-zinc-50"
-            >
-              <span>Silver – $70 (soft drinks, dinner, 5 raffle tix, donation)</span>
-              <span className="rounded-xl bg-zinc-900 px-3 py-1 text-white">Pay via Venmo</span>
-            </a>
-          </div>
+  {/* React helper: deep-link to Venmo with desktop fallback */}
+  {/* Put this function ABOVE your return if you're splitting into smaller components;
+      but inside a single component, this inline definition is fine. */}
+  {(() => {
+    function openVenmo(handle, amount, note) {
+      const deep = `venmo://paycharge?txn=pay&recipients=${encodeURIComponent(handle)}&amount=${encodeURIComponent(
+        String(amount)
+      )}&note=${encodeURIComponent(note)}`;
+
+      const web = `https://venmo.com/u/${encodeURIComponent(handle)}`;
+
+      // Try to open the Venmo app (mobile). If it doesn't catch, fall back to web.
+      const t = Date.now();
+      try {
+        window.location.href = deep;
+      } catch (_) {
+        window.location.href = web;
+        return;
+      }
+      setTimeout(() => {
+        if (Date.now() - t < 1200) {
+          window.location.href = web;
+        }
+      }, 800);
+    }
+
+    return (
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          const form = e.currentTarget;
+          const data = new FormData(form);
+
+          const name = (data.get("name") || "").toString().trim();
+          const email = (data.get("email") || "").toString().trim();
+          const tierValue = (data.get("tier") || "gold").toString(); // 'gold' | 'silver'
+          const tierLabel = tierValue === "gold" ? "Gold" : "Silver";
+
+          const amount = tierValue === "gold" ? 115 : 70; // discounted online prices
+          const note = `Emma's Elves - ${tierLabel} Ticket - ${name}`;
+
+          // Fire-and-forget RSVP to Formspree (replace ID if yours is different)
+          fetch("https://formspree.io/f/xpwyvzbk", {
+            method: "POST",
+            headers: { Accept: "application/json" },
+            body: data,
+            keepalive: true,
+          }).catch(() => {});
+
+          // Open Venmo (mobile deep link + desktop fallback)
+          openVenmo("emmas_elves", amount, note);
+        }}
+        className="mt-3 grid gap-3 text-sm"
+      >
+        <input name="name" required className="border rounded-xl px-3 py-2" placeholder="Your name" />
+        <input type="email" name="email" required className="border rounded-xl px-3 py-2" placeholder="Email" />
+
+        {/* Ticket choice */}
+        <div className="grid gap-2 rounded-xl border p-3">
+          <label className="flex items-center gap-2">
+            <input type="radio" name="tier" value="gold" defaultChecked />
+            <span className="font-medium">Gold – $115</span>
+            <span className="text-zinc-500">(4-hr open bar, dinner, donation)</span>
+          </label>
+          <label className="flex items-center gap-2">
+            <input type="radio" name="tier" value="silver" />
+            <span className="font-medium">Silver – $70</span>
+            <span className="text-zinc-500">(soft drinks, dinner, 5 raffle tix, donation)</span>
+          </label>
         </div>
+
+        <button type="submit" className="rounded-2xl bg-zinc-900 text-white px-5 py-2 hover:bg-zinc-800">
+          RSVP & Pay via Venmo
+        </button>
+
+        <p className="text-xs text-zinc-500">
+          On phones, Venmo opens with your amount and note prefilled. On desktop, we’ll open your Venmo profile:
+          <a href="https://venmo.com/u/emmas_elves" target="_blank" rel="noreferrer" className="underline ml-1">
+            venmo.com/u/emmas_elves
+          </a>.
+        </p>
+      </form>
+    );
+  })()}
+</div>
+
 
         {/* Secondary actions */}
         <div className="mt-6 flex flex-wrap gap-3">
@@ -188,15 +250,13 @@ export default function EmmasElvesSite() {
           >
             View full details on Partiful
           </a>
-
-          {/* Open donation link (no preset amount) */}
           <a
-            href={`https://venmo.com/u/emmas_elves?txn=pay&note=${encodeURIComponent("Emma's Elves Donation")}`}
+            href="https://venmo.com/u/emmas_elves"
             target="_blank"
             rel="noreferrer"
             className="rounded-2xl bg-emerald-600 px-4 py-2 text-sm text-white hover:bg-emerald-700"
           >
-            Donate via Venmo
+            Open Venmo
           </a>
         </div>
       </div>
@@ -219,6 +279,7 @@ export default function EmmasElvesSite() {
     </div>
   </div>
 </section>
+
 
 
       {/* Sponsors */}
