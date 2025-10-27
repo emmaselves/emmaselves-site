@@ -9,7 +9,6 @@ export default function EmmasElvesSite() {
           <a href="#home" className="font-semibold tracking-tight text-lg">Emma’s Elves</a>
           <nav className="hidden md:flex gap-6 text-sm">
             <a href="#about" className="hover:opacity-70">About</a>
-            <a href="#impact" className="hover:opacity-70">Impact</a>
             <a href="#event" className="hover:opacity-70">Events</a>
             <a href="#sponsor" className="hover:opacity-70">Sponsors</a>
             <a href="#contact" className="hover:opacity-70">Contact</a>
@@ -86,20 +85,7 @@ export default function EmmasElvesSite() {
         </div>
       </section>
 
-      {/* Impact */}
-      <section id="impact" className="border-t">
-        <div className="max-w-6xl mx-auto px-4 py-16">
-          <h2 className="text-2xl font-semibold">Impact</h2>
-          <div className="mt-6 grid md:grid-cols-3 gap-6">
-            {[{label:"Years running",value:"10+"},{label:"Raffle baskets (avg)",value:"20+"},{label:"Community partners",value:"15+"}].map((stat)=> (
-              <div key={stat.label} className="rounded-3xl border p-6 shadow-sm">
-                <div className="text-3xl font-semibold">{stat.value}</div>
-                <div className="text-sm text-zinc-600">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+  
 
      {/* Events */}
 <section id="event" className="py-16 border-t">
