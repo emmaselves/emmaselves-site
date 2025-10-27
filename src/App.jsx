@@ -1,4 +1,7 @@
 import React from "react";
+import { useState } from "react";
+
+
 
 export default function EmmasElvesSite() {
   return (
@@ -267,6 +270,29 @@ export default function EmmasElvesSite() {
 </section>
 
 
+{/* Raffle Baskets */}
+<section id="raffles" className="py-16 border-t">
+  <div className="mx-auto max-w-6xl px-4">
+    <header className="mb-8 text-center">
+      <h2 className="text-3xl font-bold tracking-tight">🎟️ Raffle Baskets 2025</h2>
+      <p className="mt-2 text-zinc-600">
+        Can’t make the event? You can still support Emma’s Elves by entering our raffle!
+        Choose a basket, enter how many tickets you want, or use a quick bundle.
+      </p>
+      <p className="mt-2 text-sm text-zinc-500">
+        Tickets are <b>$3 each</b>. Bundles: <b>6/$15</b> · <b>12/$25</b> · <b>20/$40</b>.
+      </p>
+    </header>
+
+    <RaffleGrid />
+    
+    <p className="mt-10 text-center text-sm text-zinc-600">
+      Winners will be drawn live at the 2025 Emma’s Elves Celebration. You don’t need to be present —
+      winners will be contacted by email or phone.
+    </p>
+  </div>
+</section>
+
 
       {/* Sponsors */}
       <section id="sponsor" className="border-t">
@@ -293,7 +319,7 @@ export default function EmmasElvesSite() {
             <ul className="mt-4 text-zinc-700 space-y-2 text-sm">
               <li>• In‑kind drop‑offs at partner locations</li>
               <li>• Gift cards (Target, Amazon, local shops)</li>
-              <li>• Monetary gifts (link or QR can go here)</li>
+              <li>• Monetary gifts (payments via venmo, zelle, cash, or check payable to Emma Benardos)</li>
             </ul>
           </div>
           <div className="rounded-3xl border p-6 shadow-sm">
@@ -351,3 +377,186 @@ export default function EmmasElvesSite() {
     </div>
   );
 }
+
+
+function RaffleGrid() {
+  // —— CONFIG ——
+  const VENMO_HANDLE = "emmas_elves";
+  const ZELLE = "631-804-2998";
+  const TICKET_PRICE = 3;
+
+  const BUNDLES = [
+    { label: "6",  amount: 15, tickets: 6 },
+    { label: "12", amount: 25, tickets: 12 },
+    { label: "20", amount: 40, tickets: 20 },
+  ];
+
+  const BASKETS = [
+    {
+      id: "spa",
+      name: "🧑🏻‍✈️Stearman Aircraft Ride",
+      blurb: "Fly around Long Island in a World War II aircraft with Pilot Michael Cifelli.",
+      // photo: "/baskets/spa.png",
+    },
+    {
+      id: "wine",
+      name: "🍷 Wine & Dine Basket",
+      blurb: "Premium wines, restaurant gift cards, and gourmet treats.",
+      // photo: "/baskets/wine.png",
+    },
+    {
+      id: "golf",
+      name: "⛳ Golf & Sports Basket",
+      blurb: "Greens fees, gear, and accessories for the sports lover.",
+      // photo: "/baskets/golf.png",
+    },
+    {
+      id: "beauty",
+      name: "💄 Luxury Beauty Basket",
+      blurb: "High-end skincare, cosmetics, and salon certificate.",
+      // photo: "/baskets/beauty.png",
+    },
+    {
+      id: "travel",
+      name: "🛫Travel Agent Services",
+      blurb: "Free travel planning by Ben Djaha for a 7-night vacation.",
+      // photo: "/baskets/travel.png",
+    },
+    {
+      id: "coffee",
+      name: "☕ Coffee Lovers Basket",
+      blurb: "Local roasts, gift cards, mugs, and treats.",
+      value: "$250+",
+      // photo: "/baskets/coffee.png",
+    },
+  ];
+  // ——————————
+
+  const [qty, setQty] = useState(
+    Object.fromEntries(BASKETS.map(b => [b.id, 1]))
+  );
+
+  function setBasketQty(id, next) {
+    const n = Math.max(1, Math.min(999, Number(next) || 1));
+    setQty(q => ({ ...q, [id]: n }));
+  }
+
+  function openVenmo(amount, note) {
+    const deep = `venmo://paycharge?txn=pay&recipients=${encodeURIComponent(
+      VENMO_HANDLE
+    )}&amount=${encodeURIComponent(String(amount))}&note=${encodeURIComponent(note)}`;
+
+    const web = `https://venmo.com/u/${encodeURIComponent(VENMO_HANDLE)}`;
+
+    const t = Date.now();
+    try {
+      window.location.href = deep;
+    } catch {
+      window.location.href = web;
+      return;
+    }
+    setTimeout(() => {
+      if (Date.now() - t < 1200) window.location.href = web;
+    }, 800);
+  }
+
+  return (
+    <div className="grid gap-8 md:grid-cols-2">
+      {BASKETS.map((b) => {
+        const tickets = qty[b.id] ?? 1;
+        const total = tickets * TICKET_PRICE;
+        const venmoNote = `Emma's Elves - Raffle: ${b.name} - ${tickets} tickets`;
+
+        return (
+          <article key={b.id} className="rounded-3xl border p-6 shadow-sm">
+            <div className="flex gap-4">
+              {/* Uncomment if you add photos in /public/baskets/... */}
+              {/* {b.photo ? (
+                <img src={b.photo} alt={b.name} className="w-28 h-28 object-cover rounded-xl border" />
+              ) : null} */}
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold">{b.name}</h3>
+                <p className="mt-2 text-sm text-zinc-600">{b.blurb}</p>
+              </div>
+            </div>
+
+            {/* Flexible input */}
+            <div className="mt-4 grid grid-cols-2 items-end gap-3">
+              <div>
+                <label className="block text-sm text-zinc-600">Tickets ($3 each)</label>
+                <div className="mt-1 flex items-center gap-2">
+                  <button
+                    onClick={() => setBasketQty(b.id, (tickets - 1))}
+                    className="rounded-lg border px-2 py-1 text-sm"
+                  >−</button>
+                  <input
+                    type="number"
+                    min={1}
+                    max={999}
+                    value={tickets}
+                    onChange={(e) => setBasketQty(b.id, e.target.value)}
+                    className="w-24 rounded-lg border px-2 py-1 text-sm"
+                  />
+                  <button
+                    onClick={() => setBasketQty(b.id, (tickets + 1))}
+                    className="rounded-lg border px-2 py-1 text-sm"
+                  >+</button>
+                </div>
+              </div>
+              <div>
+                <div className="text-sm text-zinc-600">Total</div>
+                <div className="mt-1 text-xl font-semibold">${total}</div>
+              </div>
+            </div>
+
+            <div className="mt-3">
+              <button
+                onClick={() => openVenmo(total, venmoNote)}
+                className="rounded-2xl bg-zinc-900 px-4 py-2 text-sm text-white hover:bg-zinc-800"
+              >
+                Pay via Venmo
+              </button>
+              <p className="mt-2 text-xs text-zinc-500">
+                Tip: You can repeat for multiple baskets. On desktop, if the Venmo app doesn’t open,
+                we’ll send you to venmo.com to complete payment.
+              </p>
+            </div>
+
+            {/* Quick bundles */}
+            <div className="mt-5">
+              <div className="text-sm font-medium">Or quick bundles</div>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {BUNDLES.map((bdl) => (
+                  <button
+                    key={bdl.label}
+                    onClick={() =>
+                      openVenmo(
+                        bdl.amount,
+                        `Emma's Elves - Raffle: ${b.name} - ${bdl.tickets} tickets`
+                      )
+                    }
+                    className="rounded-2xl border px-3 py-2 text-sm hover:bg-zinc-50"
+                  >
+                    {bdl.tickets} for ${bdl.amount}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Other payment methods */}
+            <div className="mt-5 text-sm text-zinc-600">
+              <p className="font-medium">Prefer another way to pay?</p>
+              <ul className="mt-1 list-disc pl-5">
+                <li>Zelle: <b>{ZELLE}</b></li>
+                <li>Pay by check: payable to <b>Emma Benardos</b>. Please write <b>Emma’s Elves</b> in the memo line.</li>
+                <li>Cash: Please reach out to arrange.</li>
+              </ul>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+
