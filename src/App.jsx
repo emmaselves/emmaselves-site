@@ -13,6 +13,7 @@ export default function EmmasElvesSite() {
           <nav className="hidden md:flex gap-6 text-sm">
             <a href="#about" className="hover:opacity-70">About</a>
             <a href="#event" className="hover:opacity-70">Events</a>
+            <a href="#volunteer" className="hover:opacity-70">Volunteer</a>
             <a href="#sponsor" className="hover:opacity-70">Sponsors</a>
             <a href="#contact" className="hover:opacity-70">Contact</a>
           </nav>
@@ -34,6 +35,10 @@ export default function EmmasElvesSite() {
             <div className="mt-6 flex flex-wrap gap-3">
               <a href="#donate" className="px-5 py-3 rounded-2xl bg-emerald-600 text-white text-sm hover:bg-emerald-700">Donate toys or funds</a>
               <a href="#event" className="px-5 py-3 rounded-2xl border text-sm hover:bg-zinc-50">See events</a>
+              <a href="#volunteer" className="px-5 py-3 rounded-2xl border text-sm hover:bg-zinc-50">
+  Volunteer
+</a>
+
             </div>
             <p className="mt-3 text-xs text-zinc-500">10th year and counting • Est. 2015</p>
           </div>
@@ -88,7 +93,6 @@ export default function EmmasElvesSite() {
         </div>
       </section>
 
-  
 
      {/* Events */}
 <section id="event" className="py-16 border-t">
@@ -290,6 +294,56 @@ export default function EmmasElvesSite() {
       Winners will be drawn live at the 2025 Emma’s Elves Celebration. You don’t need to be present —
       winners will be contacted by email or phone.
     </p>
+  </div>
+</section>
+
+
+{/* Volunteer */}
+<section id="volunteer" className="border-t">
+  <div className="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-start">
+    <div>
+      <h2 className="text-2xl font-semibold">Volunteer with Emma’s Elves</h2>
+      <p className="mt-4 text-zinc-700 leading-relaxed">
+        Want to help spread holiday cheer? We’re looking for friendly hands to keep everything running smoothly.
+        No experience needed—just a smile and a little time.
+      </p>
+      <ul className="mt-6 space-y-2 text-zinc-700">
+        <li>• <span className="font-medium">Toy pick-ups & drop-offs</span> — help collect and deliver donations.</li>
+        <li>• <span className="font-medium">Event night volunteers</span> — guest check-in and distributing raffle tickets for this year's event on Nov 28.</li>
+        <li>• <span className="font-medium">Wherever needed</span> — we’ll plug you in where you’re most helpful.</li>
+      </ul>
+      <p className="mt-4 text-sm text-zinc-500">
+        Can’t make it in person? You can still support by donating or sharing our event with friends.
+      </p>
+    </div>
+
+    {/* Quick sign-up form (Formspree) */}
+    <div className="rounded-3xl border p-6 shadow-sm">
+      <h3 className="font-medium">Sign up to volunteer</h3>
+      <form
+        action="https://formspree.io/f/xpwyvzbk"
+        method="POST"
+        className="mt-4 grid gap-3 text-sm"
+      >
+        <input type="hidden" name="type" value="Volunteer" />
+        <input name="name" required className="border rounded-xl px-3 py-2" placeholder="Your name" />
+        <input type="email" name="email" required className="border rounded-xl px-3 py-2" placeholder="Email" />
+        <input name="phone" className="border rounded-xl px-3 py-2" placeholder="Phone (optional)" />
+        <label className="block text-zinc-600 mt-2">I’m interested in</label>
+        <select name="interest" className="border rounded-xl px-3 py-2" defaultValue="Toy pick-ups & drop-offs">
+          <option>Toy pick-ups & drop-offs</option>
+          <option>Event night: check-in & ticket distribution</option>
+          <option>Wherever needed</option>
+        </select>
+        <textarea name="notes" className="border rounded-xl px-3 py-2 min-h-[100px]" placeholder="Availability, dates, or any notes (optional)" />
+        <button type="submit" className="rounded-2xl bg-zinc-900 text-white hover:bg-zinc-800 px-5 py-2">
+          Submit
+        </button>
+        <p className="text-xs text-zinc-500">
+          Prefer email? Reach us at <a className="underline" href="mailto:emmaselves@gmail.com">emmaselves@gmail.com</a>.
+        </p>
+      </form>
+    </div>
   </div>
 </section>
 
