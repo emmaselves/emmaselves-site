@@ -55,7 +55,7 @@ export default function EmmasElvesSite() {
         </div>
       </section>
 
-      {/* About */}
+      {/* Test: About */}
       <section id="about" className="border-t">
         <div className="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-start">
           <div>
