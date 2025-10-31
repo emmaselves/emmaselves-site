@@ -11,8 +11,8 @@ export default function EmmasElvesSite() {
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <a href="#home" className="font-semibold tracking-tight text-lg">Emma’s Elves</a>
           <nav className="hidden md:flex gap-6 text-sm">
-            <a href="#about" className="hover:opacity-70">About</a>
             <a href="#event" className="hover:opacity-70">Events</a>
+            <a href="#about" className="hover:opacity-70">About</a>
             <a href="#volunteer" className="hover:opacity-70">Volunteer</a>
             <a href="#supporter" className="hover:opacity-70">Supporters</a>
             <a href="#contact" className="hover:opacity-70">Contact</a>
@@ -55,44 +55,7 @@ export default function EmmasElvesSite() {
         </div>
       </section>
 
-      {/* About */}
-      <section id="about" className="border-t">
-        <div className="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-start">
-          <div>
-            <h2 className="text-2xl font-semibold">About Emma’s Elves</h2>
-            <p className="mt-4 text-zinc-700 leading-relaxed">
-              Founded in 2015, Emma’s Elves began as a small holiday gathering and has grown into a large-scale annual toy drive. We collaborate with schools, local businesses, and regional organizations to bring gifts and essentials to families who need a little extra cheer during the holidays.
-            </p>
-            <ul className="mt-6 space-y-2 text-zinc-700">
-              <li>• Community toy collection & drop-off</li>
-              <li>• Annual celebration event with live music</li>
-              <li>• Raffle baskets and sponsor partnerships</li>
-            </ul>
-          </div>
-          <div className="rounded-3xl border p-6 shadow-sm">
-            <h3 className="font-medium">Quick Facts</h3>
-            <dl className="mt-4 grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <dt className="text-zinc-500">Founded</dt>
-                <dd className="font-medium">2015</dd>
-              </div>
-              <div>
-                <dt className="text-zinc-500">Based in</dt>
-                <dd className="font-medium">Long Island, NY</dd>
-              </div>
-              <div>
-                <dt className="text-zinc-500">Partner orgs</dt>
-                <dd className="font-medium">Schools & local nonprofits</dd>
-              </div>
-              <div>
-                <dt className="text-zinc-500">Contact</dt>
-                <dd className="font-medium">emmaselves@gmail.com</dd>
-              </div>
-            </dl>
-          </div>
-        </div>
-      </section>
-
+     
 
      {/* Events */}
 <section id="event" className="py-16 border-t">
@@ -230,7 +193,7 @@ export default function EmmasElvesSite() {
 </div>
 
 
-        {/* Secondary actions */}
+        {/* Secondary actions (removed) */}
         <div className="mt-6 flex flex-wrap gap-3">
           <a
             href="https://partiful.com/e/DV0hAR57C77cdtNe2OSh"
@@ -293,6 +256,44 @@ export default function EmmasElvesSite() {
     </p>
   </div>
 </section>
+
+ {/* About */}
+      <section id="about" className="border-t">
+        <div className="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-start">
+          <div>
+            <h2 className="text-2xl font-semibold">About Emma’s Elves</h2>
+            <p className="mt-4 text-zinc-700 leading-relaxed">
+              Founded in 2015, Emma’s Elves began as a small holiday gathering and has grown into a large-scale annual toy drive. We collaborate with schools, local businesses, and regional organizations to bring gifts and essentials to families who need a little extra cheer during the holidays.
+            </p>
+            <ul className="mt-6 space-y-2 text-zinc-700">
+              <li>• Community toy collection & drop-off</li>
+              <li>• Annual celebration event with live music</li>
+              <li>• Raffle baskets and sponsor partnerships</li>
+            </ul>
+          </div>
+          <div className="rounded-3xl border p-6 shadow-sm">
+            <h3 className="font-medium">Quick Facts</h3>
+            <dl className="mt-4 grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <dt className="text-zinc-500">Founded</dt>
+                <dd className="font-medium">2015</dd>
+              </div>
+              <div>
+                <dt className="text-zinc-500">Based in</dt>
+                <dd className="font-medium">Long Island, NY</dd>
+              </div>
+              <div>
+                <dt className="text-zinc-500">Partner orgs</dt>
+                <dd className="font-medium">Schools & local nonprofits</dd>
+              </div>
+              <div>
+                <dt className="text-zinc-500">Contact</dt>
+                <dd className="font-medium">emmaselves@gmail.com</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </section>
 
 
 {/* Volunteer */}
