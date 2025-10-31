@@ -14,7 +14,7 @@ export default function EmmasElvesSite() {
             <a href="#about" className="hover:opacity-70">About</a>
             <a href="#event" className="hover:opacity-70">Events</a>
             <a href="#volunteer" className="hover:opacity-70">Volunteer</a>
-            <a href="#sponsor" className="hover:opacity-70">Sponsors</a>
+            <a href="#supporter" className="hover:opacity-70">Supporters</a>
             <a href="#contact" className="hover:opacity-70">Contact</a>
           </nav>
           <a href="#donate" className="px-4 py-2 rounded-2xl bg-zinc-900 text-white text-sm hover:bg-zinc-800">Donate</a>
@@ -40,7 +40,7 @@ export default function EmmasElvesSite() {
 </a>
 
             </div>
-            <p className="mt-3 text-xs text-zinc-500">10th year and counting • Est. 2015</p>
+            <p className="mt-3 text-xs text-zinc-500">Est. 2015</p>
           </div>
           <div className="relative">
             <div className="aspect-[4/3] w-full rounded-3xl bg-white shadow-lg ring-1 ring-zinc-100 p-4">
@@ -55,7 +55,7 @@ export default function EmmasElvesSite() {
         </div>
       </section>
 
-      {/* Test: About */}
+      {/* About */}
       <section id="about" className="border-t">
         <div className="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-start">
           <div>
@@ -119,7 +119,7 @@ export default function EmmasElvesSite() {
         <dl className="grid grid-cols-1 gap-3 text-sm">
           <div>
             <dt className="text-zinc-500">Date</dt>
-            <dd className="font-medium">Friday, November 28, 2025 · 6:30–11:30 PM</dd>
+            <dd className="font-medium">Friday, November 28, 2025 · 7:30–11:30 PM</dd>
           </div>
           <div>
             <dt className="text-zinc-500">Venue</dt>
@@ -139,7 +139,7 @@ export default function EmmasElvesSite() {
 
         {/* Discount note */}
         <div className="mt-4 rounded-xl bg-emerald-50 p-3 text-emerald-700 text-sm">
-          💡 Pre-purchase online and get <b>$10 off</b>. (At the door: Gold $125 / Silver $80)
+          💡 Pre-purchase online and get <b>$15 off</b>. (At the door: Gold $125 / Silver $90)
         </div>
 
         {/* RSVP & Pay */}
@@ -184,7 +184,7 @@ export default function EmmasElvesSite() {
           const tierValue = (data.get("tier") || "gold").toString(); // 'gold' | 'silver'
           const tierLabel = tierValue === "gold" ? "Gold" : "Silver";
 
-          const amount = tierValue === "gold" ? 115 : 70; // discounted online prices
+          const amount = tierValue === "gold" ? 110 : 80; // discounted online prices
           const note = `Emma's Elves - ${tierLabel} Ticket - ${name}`;
 
           // Fire-and-forget RSVP to Formspree (replace ID if yours is different)
@@ -207,12 +207,12 @@ export default function EmmasElvesSite() {
         <div className="grid gap-2 rounded-xl border p-3">
           <label className="flex items-center gap-2">
             <input type="radio" name="tier" value="gold" defaultChecked />
-            <span className="font-medium">Gold – $115</span>
-            <span className="text-zinc-500">(4-hr open bar, dinner, donation)</span>
+            <span className="font-medium">Gold – $110</span>
+            <span className="text-zinc-500">(open bar, dinner, donation)</span>
           </label>
           <label className="flex items-center gap-2">
             <input type="radio" name="tier" value="silver" />
-            <span className="font-medium">Silver – $70</span>
+            <span className="font-medium">Silver – $80</span>
             <span className="text-zinc-500">(soft drinks, dinner, 5 raffle tix, donation)</span>
           </label>
         </div>
@@ -222,10 +222,7 @@ export default function EmmasElvesSite() {
         </button>
 
         <p className="text-xs text-zinc-500">
-          On phones, Venmo opens with your amount and note prefilled. On desktop, we’ll open your Venmo profile:
-          <a href="https://venmo.com/u/emmas_elves" target="_blank" rel="noreferrer" className="underline ml-1">
-            venmo.com/u/emmas_elves
-          </a>.
+      "I prefer another way to pay": You can also Zelle to <b>631-804-2998</b>, pay by cash or check (payable to Emma Benardos)"
         </p>
       </form>
     );
@@ -348,21 +345,60 @@ export default function EmmasElvesSite() {
 </section>
 
 
-      {/* Sponsors */}
-      <section id="sponsor" className="border-t">
-        <div className="max-w-6xl mx-auto px-4 py-16">
-          <h2 className="text-2xl font-semibold">Sponsors</h2>
-          <p className="mt-3 text-zinc-700 max-w-3xl">We welcome in‑kind donations (our preference) and community partnerships. If your business would like to contribute goods, services, or raffle items, we’d love to hear from you.</p>
-          <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="aspect-[3/2] rounded-2xl border grid place-items-center text-zinc-400 text-sm">Logo</div>
-            ))}
-          </div>
-          <div className="mt-6">
-            <a href="#contact" className="px-5 py-3 rounded-2xl bg-emerald-600 text-white text-sm hover:bg-emerald-700">Become a sponsor</a>
-          </div>
-        </div>
-      </section>
+    {/* Supporters */}
+<section id="supporter" className="border-t py-16">
+  <div className="max-w-6xl mx-auto px-4">
+    <h2 className="text-3xl font-bold text-center mb-10">Supporters</h2>
+
+    {/* Sponsors */}
+    <div className="mb-12 text-center">
+      <h3 className="text-xl font-semibold mb-4 text-zinc-700">Sponsors</h3>
+      <p className="text-zinc-600 mb-6">
+        Thank you to the incredible businesses and individuals who help make Emma’s Elves possible.
+      </p>
+
+      {/* Compact sponsor names in a grid */}
+      {/* Compact sponsor names in a grid */}
+<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-3 text-sm text-zinc-700">
+  <a href="https://www.greatsouthbaybrewery.com" target="_blank" rel="noreferrer" className="hover:text-emerald-700 hover:underline transition-colors">Great South Bay Brewery</a>
+  <a href="https://www.licares.org" target="_blank" rel="noreferrer" className="hover:text-emerald-700 hover:underline transition-colors">Long Island Cares</a>
+  <a href="https://www.actionsportsny.com/" className="hover:text-emerald-700 hover:underline transition-colors">Action Sports</a>
+  <a href="https://www.heartandsoulwax.com/" className="hover:text-emerald-700 hover:underline transition-colors">Heart & Soul Wax</a>
+  <a href="https://southshoregolf.net/" className="hover:text-emerald-700 hover:underline transition-colors">South Shore Golf</a>
+  <a href="https://www.wherestarscollide.com/" className="hover:text-emerald-700 hover:underline transition-colors">Where Stars Collide</a>
+  <a href="#" className="hover:text-emerald-700 hover:underline transition-colors">Ben Djaha Travel</a>
+  <a href="#" className="hover:text-emerald-700 hover:underline transition-colors">Michael Cifelli Aviation</a>
+  <a href="https://riverheadcider.com/" className="hover:text-emerald-700 hover:underline transition-colors">The Riverhead Ciderhouse</a>
+  <a href="https://www.theharpandhoundny.com/" className="hover:text-emerald-700 hover:underline transition-colors">The Harp & Hound</a>
+  <a href="https://tellerschophouse.com/" className="hover:text-emerald-700 hover:underline transition-colors">Tellers</a>
+  <a href="https://danoiislip.com/" className="hover:text-emerald-700 hover:underline transition-colors">Da Noi</a>
+  <a href="#" className="hover:text-emerald-700 hover:underline transition-colors">A Krafty Event</a>
+  <a href="https://www.itakitchen.com/" className="hover:text-emerald-700 hover:underline transition-colors">ITA Kitchen</a>
+  <a href="#" className="hover:text-emerald-700 hover:underline transition-colors">Local Schools</a>
+  <a href="#" className="hover:text-emerald-700 hover:underline transition-colors">Community Members</a>
+  <a href="#" className="hover:text-emerald-700 hover:underline transition-colors">Neighborhood Businesses</a>
+  <a href="#" className="hover:text-emerald-700 hover:underline transition-colors">Family & Friends</a>
+</div>
+    </div>
+
+    {/* Community Partner */}
+    <div className="border-t pt-12">
+      <h3 className="text-xl font-semibold mb-4 text-zinc-700 text-center">Community Partner</h3>
+      <div className="flex flex-col items-center">
+        <img
+          src="/LIC.png"  
+          alt="Long Island Cares"
+          className="w-48 mb-4"
+        />
+        <p className="text-center text-zinc-600 max-w-xl">
+          We’re proud to partner with <a href="https://www.licares.org" target="_blank" rel="noreferrer" className="underline text-emerald-700 hover:text-emerald-800">Long Island Cares</a> to distribute toys and essentials to local families in need.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
       {/* Donate */}
       <section id="donate" className="border-t">
