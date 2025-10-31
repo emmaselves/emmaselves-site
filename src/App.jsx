@@ -9,7 +9,14 @@ export default function EmmasElvesSite() {
       {/* Nav */}
       <header className="sticky top-0 z-50 backdrop-blur bg-white/70 border-b">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <a href="#home" className="font-semibold tracking-tight text-lg">Emma’s Elves</a>
+          <a href="#" className="flex items-center space-x-2">
+  <img 
+    src="/public/eenav.png" 
+    alt="Emma’s Elves logo" 
+    className="h-10 w-auto"
+  />
+</a>
+
           <nav className="hidden md:flex gap-6 text-sm">
             <a href="#event" className="hover:opacity-70">Events</a>
             <a href="#about" className="hover:opacity-70">About</a>
@@ -25,6 +32,14 @@ export default function EmmasElvesSite() {
       <section id="home" className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-amber-50 via-white to-emerald-50" />
         <div className="max-w-6xl mx-auto px-4 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center">
+          <div className="text-center mt-16">
+  <img 
+    src="/public/eelogo.png" 
+    alt="Emma’s Elves logo"
+    className="mx-auto h-32 w-auto mb-6"
+  />
+</div>
+
           <div>
             <h1 className="text-4xl md:text-5xl font-semibold leading-tight">
               Spreading joy—one gift at a time.
@@ -41,16 +56,6 @@ export default function EmmasElvesSite() {
 
             </div>
             <p className="mt-3 text-xs text-zinc-500">Est. 2015</p>
-          </div>
-          <div className="relative">
-            <div className="aspect-[4/3] w-full rounded-3xl bg-white shadow-lg ring-1 ring-zinc-100 p-4">
-              <div className="h-full w-full rounded-2xl bg-[radial-gradient(ellipse_at_top_left,rgba(16,185,129,0.12),transparent_40%),radial-gradient(ellipse_at_bottom_right,rgba(245,158,11,0.12),transparent_40%)] flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-6xl">🎁</div>
-                  <p className="mt-2 text-sm text-zinc-600">Community • Kindness • Cheer</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -551,6 +556,7 @@ function RaffleGrid() {
     }, 800);
   }
 
+  
   return (
     <div className="grid gap-8 md:grid-cols-2">
       {BASKETS.map((b) => {
