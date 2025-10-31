@@ -28,37 +28,65 @@ export default function EmmasElvesSite() {
         </div>
       </header>
 
-      {/* Hero */}
-      <section id="home" className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-amber-50 via-white to-emerald-50" />
-        <div className="max-w-6xl mx-auto px-4 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center">
-          <div className="text-center mt-16">
-  <img 
-    src="/public/eelogo.png" 
-    alt="Emma’s Elves logo"
-    className="mx-auto h-32 w-auto mb-6"
-  />
-</div>
+{/* Hero */}
+<section id="home" className="relative overflow-hidden">
+  {/* background */}
+  <div className="absolute inset-0 -z-10 bg-gradient-to-br from-amber-50 via-white to-emerald-50" />
 
-          <div>
-            <h1 className="text-4xl md:text-5xl font-semibold leading-tight">
-              Spreading joy—one gift at a time.
-            </h1>
-            <p className="mt-4 text-lg text-zinc-700">
-              Emma’s Elves is a Long Island–based holiday toy drive and community event that partners with local schools, businesses, and organizations to support underserved families.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href="#donate" className="px-5 py-3 rounded-2xl bg-emerald-600 text-white text-sm hover:bg-emerald-700">Donate toys or funds</a>
-              <a href="#event" className="px-5 py-3 rounded-2xl border text-sm hover:bg-zinc-50">See events</a>
-              <a href="#volunteer" className="px-5 py-3 rounded-2xl border text-sm hover:bg-zinc-50">
-  Volunteer
-</a>
+  {/* content container */}
+  <div className="max-w-6xl mx-auto px-4 py-20 md:py-28">
+    {/* logo */}
+    <div className="text-center mt-16">
+      <img
+        src="/eelogo.png"   // file in /public
+        alt="Emma’s Elves logo"
+        className="mx-auto h-32 w-auto mb-6"
+      />
+    </div>
 
-            </div>
-            <p className="mt-3 text-xs text-zinc-500">Est. 2015</p>
-          </div>
-        </div>
-      </section>
+    {/* text + actions */}
+    <div>
+      <h1 className="text-4xl md:text-5xl font-semibold leading-tight">
+        Spreading joy—one gift at a time.
+      </h1>
+
+      <p className="mt-4 text-lg text-zinc-700">
+        Emma’s Elves is a Long Island–based holiday toy drive and community event.
+      </p>
+
+      {/* hero actions */}
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        {/* primary CTA to on-page RSVP/details */}
+        <a
+          href="#event"
+          className="inline-flex w-full items-center justify-center rounded-2xl bg-emerald-600 px-5 py-3 text-base font-medium text-white hover:bg-emerald-700 sm:w-auto"
+          aria-label="RSVP and buy tickets"
+        >
+          RSVP / Buy Tickets
+        </a>
+
+        {/* secondary nav-style buttons */}
+        <a href="#about" className="inline-flex w-full items-center justify-center rounded-2xl border px-5 py-3 text-sm hover:bg-zinc-50 sm:w-auto">
+          About
+        </a>
+        <a href="#event" className="inline-flex w-full items-center justify-center rounded-2xl border px-5 py-3 text-sm hover:bg-zinc-50 sm:w-auto">
+          Event Details
+        </a>
+        <a href="#supporter" className="inline-flex w-full items-center justify-center rounded-2xl border px-5 py-3 text-sm hover:bg-zinc-50 sm:w-auto">
+          Supporters
+        </a>
+        <a href="#volunteer" className="inline-flex w-full items-center justify-center rounded-2xl border px-5 py-3 text-sm hover:bg-zinc-50 sm:w-auto">
+          Volunteer
+        </a>
+        <a href="#contact" className="inline-flex w-full items-center justify-center rounded-2xl border px-5 py-3 text-sm hover:bg-zinc-50 sm:w-auto">
+          Contact
+        </a>
+      </div>
+
+      <p className="mt-3 text-xs text-zinc-500">Est. 2015</p>
+    </div>
+  </div>
+</section>
 
      
 
