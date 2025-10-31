@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function EmmasElvesSite() {
   return (
-    <div className="min-h-screen bg-white text-zinc-900">
+    <div className="min-h-screen bg-white text-zinc-900 pb-24 sm:pb-0">
       {/* Nav */}
       <header className="sticky top-0 z-50 backdrop-blur bg-white/70 border-b">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -28,70 +28,64 @@ export default function EmmasElvesSite() {
         </div>
       </header>
 
-{/* Hero */}
+{/* ====================== Hero (mobile-first, RSVP-focused) ====================== */}
 <section id="home" className="relative overflow-hidden">
-  {/* background */}
+  {/* soft bg */}
   <div className="absolute inset-0 -z-10 bg-gradient-to-br from-amber-50 via-white to-emerald-50" />
 
-  {/* content container */}
-  <div className="max-w-6xl mx-auto px-4 py-20 md:py-28">
-    {/* logo */}
-    <div className="text-center mt-16">
+  {/* tighter mobile padding so CTA is above the fold */}
+  <div className="max-w-6xl mx-auto px-4 py-10 md:py-24">
+    {/* Logo */}
+    <div className="text-center mt-8 md:mt-16">
+      {/* If your file is /public/eelogo.png, the src should be exactly "/eelogo.png" */}
       <img
-        src="/eelogo.png"   // file in /public
+        src="/eelogo.png"
         alt="Emma’s Elves logo"
-        className="mx-auto h-32 w-auto mb-6"
+        className="mx-auto h-20 w-auto md:h-32 mb-4 md:mb-6"
       />
     </div>
 
-    {/* text + actions */}
-    <div>
-      <h1 className="text-4xl md:text-5xl font-semibold leading-tight">
+    {/* Headline + subcopy */}
+    <div className="text-center">
+      <h1 className="text-3xl md:text-5xl font-semibold leading-tight">
         Spreading joy—one gift at a time.
       </h1>
-
-      <p className="mt-4 text-lg text-zinc-700">
+      <p className="mt-3 text-base text-zinc-700 md:text-lg">
         Emma’s Elves is a Long Island–based holiday toy drive and community event.
       </p>
-
-      {/* hero actions */}
-      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-        {/* primary CTA to on-page RSVP/details */}
-        <a
-          href="#event"
-          className="inline-flex w-full items-center justify-center rounded-2xl bg-emerald-600 px-5 py-3 text-base font-medium text-white hover:bg-emerald-700 sm:w-auto"
-          aria-label="RSVP and buy tickets"
-        >
-          RSVP / Buy Tickets
-        </a>
-
-        {/* secondary nav-style buttons */}
-        <a href="#about" className="inline-flex w-full items-center justify-center rounded-2xl border px-5 py-3 text-sm hover:bg-zinc-50 sm:w-auto">
-          About
-        </a>
-        <a href="#event" className="inline-flex w-full items-center justify-center rounded-2xl border px-5 py-3 text-sm hover:bg-zinc-50 sm:w-auto">
-          Event Details
-        </a>
-        <a href="#supporter" className="inline-flex w-full items-center justify-center rounded-2xl border px-5 py-3 text-sm hover:bg-zinc-50 sm:w-auto">
-          Supporters
-        </a>
-        <a href="#volunteer" className="inline-flex w-full items-center justify-center rounded-2xl border px-5 py-3 text-sm hover:bg-zinc-50 sm:w-auto">
-          Volunteer
-        </a>
-        <a href="#contact" className="inline-flex w-full items-center justify-center rounded-2xl border px-5 py-3 text-sm hover:bg-zinc-50 sm:w-auto">
-          Contact
-        </a>
-      </div>
-
-      <p className="mt-3 text-xs text-zinc-500">Est. 2015</p>
     </div>
+
+    {/* Actions */}
+    <div className="mt-4 space-y-3">
+      {/* Primary CTA */}
+      <a
+        href="#event"
+        className="inline-flex w-full items-center justify-center rounded-2xl bg-emerald-600 px-5 py-3 text-base font-semibold text-white hover:bg-emerald-700"
+        aria-label="RSVP and buy tickets"
+      >
+        RSVP / Buy Tickets
+      </a>
+
+      {/* Secondary chips (horizontal scroll on mobile) */}
+      <div className="-mx-4 px-4 overflow-x-auto">
+        <div className="flex gap-2 w-max mx-auto md:mx-0">
+          <a href="#about" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">About</a>
+          <a href="#event" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">Event</a>
+          <a href="#supporter" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">Supporters</a>
+          <a href="#volunteer" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">Volunteer</a>
+          <a href="#contact" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">Contact</a>
+        </div>
+      </div>
+    </div>
+
+    <p className="mt-3 text-center text-xs text-zinc-500">Est. 2015</p>
   </div>
 </section>
 
      
 
      {/* Events */}
-<section id="event" className="py-16 border-t">
+<section id="event" className="py-16 border-t scroll-mt-24 md:scroll-mt-28">
   <div className="mx-auto max-w-6xl px-4">
     <header className="mb-8 text-center">
       <h2 className="text-3xl font-bold tracking-tight">🎁 Emma’s Elves 2025 Celebration</h2>
@@ -680,8 +674,26 @@ function RaffleGrid() {
           </article>
         );
       })}
+      {/* ✅ Sticky mobile RSVP bar – mobile only */}
+<div className="fixed inset-x-0 bottom-0 z-50 border-t bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 sm:hidden">
+  <div className="mx-auto max-w-6xl px-3 pb-[calc(env(safe-area-inset-bottom)+12px)] pt-3">
+    <a
+      href="#event"
+      className="block w-full text-center rounded-2xl bg-emerald-600 px-5 py-3 text-base font-semibold text-white shadow-md shadow-emerald-600/20 hover:bg-emerald-700 active:translate-y-px"
+      aria-label="RSVP and buy tickets"
+    >
+      RSVP / Buy Tickets
+    </a>
+  </div>
+</div>
     </div>
+    
+    
+
+
   );
 }
+
+
 
 
