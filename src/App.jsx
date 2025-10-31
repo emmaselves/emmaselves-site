@@ -94,15 +94,9 @@ export default function EmmasElvesSite() {
       </p>
     </header>
 
-    <div className="grid gap-8 md:grid-cols-2">
-      {/* Flyer (public/flyer.png) */}
-      <div>
-        <img
-          src="/flyer.png"
-          alt="Emma’s Elves Event Flyer"
-          className="w-full rounded-3xl border shadow-sm"
-        />
-      </div>
+    <div className="grid gap-8">
+
+      
 
       {/* Details + RSVP & Pay */}
       <div className="rounded-3xl border p-6 shadow-sm">
@@ -220,25 +214,7 @@ export default function EmmasElvesSite() {
 </div>
 
 
-        {/* Secondary actions (removed) */}
-        <div className="mt-6 flex flex-wrap gap-3">
-          <a
-            href="https://partiful.com/e/DV0hAR57C77cdtNe2OSh"
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-2xl border px-4 py-2 text-sm hover:bg-zinc-50"
-          >
-            View full details on Partiful
-          </a>
-          <a
-            href="https://venmo.com/u/emmas_elves"
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-2xl bg-emerald-600 px-4 py-2 text-sm text-white hover:bg-emerald-700"
-          >
-            Open Venmo
-          </a>
-        </div>
+        
       </div>
     </div>
 
