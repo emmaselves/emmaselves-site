@@ -11,7 +11,7 @@ export default function EmmasElvesSite() {
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <a href="#" className="flex items-center space-x-2">
   <img 
-    src="/public/eenav.png" 
+    src="eenav.png" 
     alt="Emma’s Elves logo" 
     className="h-10 w-auto"
   />
