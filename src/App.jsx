@@ -211,7 +211,7 @@ export default function EmmasElvesSite() {
         </button>
 
         <p className="text-xs text-zinc-500">
-      "I prefer another way to pay": You can also Zelle to <b>631-804-2998</b>, pay by cash or check (payable to Emma Benardos)"
+      "I prefer another way to pay": You can also Zelle to <b>631-804-2998</b>, pay by cash or check (payable to Emma Benardos)
         </p>
       </form>
     );
