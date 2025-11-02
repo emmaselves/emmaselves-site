@@ -69,10 +69,10 @@ export default function EmmasElvesSite() {
       {/* Secondary chips (horizontal scroll on mobile) */}
       <div className="-mx-4 px-4 overflow-x-auto">
         <div className="flex gap-2 w-max mx-auto md:mx-0">
+          <a href="#event" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">Events</a>
           <a href="#about" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">About</a>
-          <a href="#event" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">Event</a>
-          <a href="#supporter" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">Supporters</a>
           <a href="#volunteer" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">Volunteer</a>
+          <a href="#supporter" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">Supporters</a>
           <a href="#contact" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">Contact</a>
         </div>
       </div>
@@ -119,6 +119,11 @@ export default function EmmasElvesSite() {
               </a>
             </dd>
           </div>
+          <div>
+            <dt className="text-zinc-500">Raffles</dt>
+            <dd className="font-medium">Scroll down to see some of our baskets and buy tickets in advance! Ticket entry will close at 9:30 PM</dd>
+          </div>
+          
         </dl>
 
         {/* Discount note */}
@@ -244,10 +249,10 @@ export default function EmmasElvesSite() {
       <h2 className="text-3xl font-bold tracking-tight">🎟️ Raffle Baskets 2025</h2>
       <p className="mt-2 text-zinc-600">
         Can’t make the event? You can still support Emma’s Elves by entering our raffle!
-        Choose a basket, enter how many tickets you want, or use a quick bundle.
+        Choose a basket, enter how many tickets you want, or use a quick bundle. Our winners will be called at 9:30 PM!
       </p>
       <p className="mt-2 text-sm text-zinc-500">
-        Tickets are <b>$3 each</b>. Bundles: <b>6/$15</b> · <b>12/$25</b> · <b>20/$40</b>.
+        Tickets are <b>$5 each</b>. Bundles: <b>10/$35</b> · <b>20/$60</b> · <b>40/$100</b>.
       </p>
     </header>
 
