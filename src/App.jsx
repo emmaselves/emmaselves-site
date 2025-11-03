@@ -16,11 +16,13 @@ export default function EmmasElvesSite() {
 
           <nav className="hidden md:flex gap-6 text-sm">
             <a href="#event" className="hover:opacity-70">Events</a>
+            <a href="#raffles" className="hover:opacity-70">Raffles</a>
             <a href="#about" className="hover:opacity-70">About</a>
             <a href="#volunteer" className="hover:opacity-70">Volunteer</a>
             <a href="#supporter" className="hover:opacity-70">Supporters</a>
             <a href="#contact" className="hover:opacity-70">Contact</a>
           </nav>
+
           <a href="#donate" className="px-4 py-2 rounded-2xl bg-zinc-900 text-white text-sm hover:bg-zinc-800">Donate</a>
         </div>
       </header>
@@ -56,6 +58,7 @@ export default function EmmasElvesSite() {
             <div className="-mx-4 px-4 overflow-x-auto">
               <div className="flex gap-2 w-max mx-auto md:mx-0">
                 <a href="#event" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">Events</a>
+                <a href="#raffles" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">Raffles</a>
                 <a href="#about" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">About</a>
                 <a href="#volunteer" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">Volunteer</a>
                 <a href="#supporter" className="inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm whitespace-nowrap hover:bg-zinc-50">Supporters</a>
@@ -137,113 +140,113 @@ export default function EmmasElvesSite() {
                   }
 
                   return (
-  <form
-    onSubmit={(e) => {
-      e.preventDefault();
-      const form = e.currentTarget;
-      const data = new FormData(form);
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        const form = e.currentTarget;
+                        const data = new FormData(form);
 
-      const name = (data.get("name") || "").toString().trim();
-      const email = (data.get("email") || "").toString().trim();
+                        const name = (data.get("name") || "").toString().trim();
+                        const email = (data.get("email") || "").toString().trim();
 
-      const goldQty = Number(data.get("gold_qty") || 0);
-      const silverQty = Number(data.get("silver_qty") || 0);
+                        const goldQty = Number(data.get("gold_qty") || 0);
+                        const silverQty = Number(data.get("silver_qty") || 0);
 
-      const GOLD = 110;
-      const SILVER = 80;
-      const amount = goldQty * GOLD + silverQty * SILVER;
+                        const GOLD = 110;
+                        const SILVER = 80;
+                        const amount = goldQty * GOLD + silverQty * SILVER;
 
-      const parts = [];
-      if (goldQty) parts.push(`${goldQty}×Gold`);
-      if (silverQty) parts.push(`${silverQty}×Silver`);
-      const detail = parts.length ? ` (${parts.join(" + ")})` : "";
-      const note = `Emma's Elves - RSVP${detail} - ${name}`;
+                        const parts = [];
+                        if (goldQty) parts.push(`${goldQty}×Gold`);
+                        if (silverQty) parts.push(`${silverQty}×Silver`);
+                        const detail = parts.length ? ` (${parts.join(" + ")})` : "";
+                        const note = `Emma's Elves - RSVP${detail} - ${name}`;
 
-      data.set("type", "RSVP & Pay");
-      data.set("gold_qty", goldQty);
-      data.set("silver_qty", silverQty);
-      data.set("amount", amount);
+                        data.set("type", "RSVP & Pay");
+                        data.set("gold_qty", goldQty);
+                        data.set("silver_qty", silverQty);
+                        data.set("amount", amount);
 
-      fetch("https://formspree.io/f/xpwyvzbk", {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: data,
-        keepalive: true,
-      }).catch(() => {});
+                        fetch("https://formspree.io/f/xpwyvzbk", {
+                          method: "POST",
+                          headers: { Accept: "application/json" },
+                          body: data,
+                          keepalive: true,
+                        }).catch(() => { });
 
-      openVenmo("emmas_elves", amount, note);
-    }}
-    className="mt-3 grid gap-3 text-sm"
-  >
-    <input name="name" required className="border rounded-xl px-3 py-2" placeholder="Your name" />
-    <input type="email" name="email" required className="border rounded-xl px-3 py-2" placeholder="Email" />
+                        openVenmo("emmas_elves", amount, note);
+                      }}
+                      className="mt-3 grid gap-3 text-sm"
+                    >
+                      <input name="name" required className="border rounded-xl px-3 py-2" placeholder="Your name" />
+                      <input type="email" name="email" required className="border rounded-xl px-3 py-2" placeholder="Email" />
 
-    {/* Quantities */}
-    <div className="grid gap-3 rounded-xl border p-3">
-      <div className="flex items-center justify-between gap-3">
-        <div>
-          <div className="font-medium">Gold – $110</div>
-          <div className="text-zinc-500">open bar, dinner, donation</div>
-        </div>
-        <input
-          type="number"
-          name="gold_qty"
-          min={0}
-          defaultValue={0}
-          className="w-20 rounded-md border px-2 py-1 text-right"
-          onInput={(e) => {
-            const form = e.currentTarget.form;
-            const g = Number(form.gold_qty.value || 0);
-            const s = Number(form.silver_qty.value || 0);
-            const total = g * 110 + s * 80;
-            const btn = form.querySelector("#rsvp-total-btn");
-            btn.textContent =
-              total > 0
-                ? `RSVP & Pay $${total} via Venmo`
-                : "RSVP & Pay via Venmo";
-          }}
-        />
-      </div>
+                      {/* Quantities */}
+                      <div className="grid gap-3 rounded-xl border p-3">
+                        <div className="flex items-center justify-between gap-3">
+                          <div>
+                            <div className="font-medium">Gold – $110</div>
+                            <div className="text-zinc-500">open bar, dinner, donation</div>
+                          </div>
+                          <input
+                            type="number"
+                            name="gold_qty"
+                            min={0}
+                            defaultValue={0}
+                            className="w-20 rounded-md border px-2 py-1 text-right"
+                            onInput={(e) => {
+                              const form = e.currentTarget.form;
+                              const g = Number(form.gold_qty.value || 0);
+                              const s = Number(form.silver_qty.value || 0);
+                              const total = g * 110 + s * 80;
+                              const btn = form.querySelector("#rsvp-total-btn");
+                              btn.textContent =
+                                total > 0
+                                  ? `RSVP & Pay $${total} via Venmo`
+                                  : "RSVP & Pay via Venmo";
+                            }}
+                          />
+                        </div>
 
-      <div className="flex items-center justify-between gap-3">
-        <div>
-          <div className="font-medium">Silver – $80</div>
-          <div className="text-zinc-500">soft drinks, dinner, 5 raffle tix, donation</div>
-        </div>
-        <input
-          type="number"
-          name="silver_qty"
-          min={0}
-          defaultValue={0}
-          className="w-20 rounded-md border px-2 py-1 text-right"
-          onInput={(e) => {
-            const form = e.currentTarget.form;
-            const g = Number(form.gold_qty.value || 0);
-            const s = Number(form.silver_qty.value || 0);
-            const total = g * 110 + s * 80;
-            const btn = form.querySelector("#rsvp-total-btn");
-            btn.textContent =
-              total > 0
-                ? `RSVP & Pay $${total} via Venmo`
-                : "RSVP & Pay via Venmo";
-          }}
-        />
-      </div>
-    </div>
+                        <div className="flex items-center justify-between gap-3">
+                          <div>
+                            <div className="font-medium">Silver – $80</div>
+                            <div className="text-zinc-500">soft drinks, dinner, 5 raffle tix, donation</div>
+                          </div>
+                          <input
+                            type="number"
+                            name="silver_qty"
+                            min={0}
+                            defaultValue={0}
+                            className="w-20 rounded-md border px-2 py-1 text-right"
+                            onInput={(e) => {
+                              const form = e.currentTarget.form;
+                              const g = Number(form.gold_qty.value || 0);
+                              const s = Number(form.silver_qty.value || 0);
+                              const total = g * 110 + s * 80;
+                              const btn = form.querySelector("#rsvp-total-btn");
+                              btn.textContent =
+                                total > 0
+                                  ? `RSVP & Pay $${total} via Venmo`
+                                  : "RSVP & Pay via Venmo";
+                            }}
+                          />
+                        </div>
+                      </div>
 
-    <button
-      id="rsvp-total-btn"
-      type="submit"
-      className="rounded-2xl bg-zinc-900 text-white px-5 py-2 hover:bg-zinc-800"
-    >
-      RSVP & Pay via Venmo
-    </button>
+                      <button
+                        id="rsvp-total-btn"
+                        type="submit"
+                        className="rounded-2xl bg-zinc-900 text-white px-5 py-2 hover:bg-zinc-800"
+                      >
+                        RSVP & Pay via Venmo
+                      </button>
 
-    <p className="text-xs text-zinc-500">
-      Prefer another way to pay? Use the option below for Zelle/Check/Cash.
-    </p>
-  </form>
-);
+                      <p className="text-xs text-zinc-500">
+                        Prefer another way to pay? Use the option below for Zelle/Check/Cash.
+                      </p>
+                    </form>
+                  );
                 })()}
               </div>
 
@@ -257,99 +260,99 @@ export default function EmmasElvesSite() {
                 </button>
 
                 {altRSVPOpen && (
-  <form
-    action="https://formspree.io/f/xpwyvzbk"
-    method="POST"
-    className="mt-4 grid gap-3 text-sm"
-    onInput={(e) => {
-      const form = e.currentTarget;
-      const g = Number(form.gold_qty?.value || 0);
-      const s = Number(form.silver_qty?.value || 0);
-      const total = g * 110 + s * 80;
-      const totalDisplay = form.querySelector("#alt-total");
-      if (totalDisplay) totalDisplay.textContent = total > 0 ? `$${total}` : "$0";
-    }}
-  >
-    <input type="hidden" name="type" value="Alt RSVP" />
+                  <form
+                    action="https://formspree.io/f/xpwyvzbk"
+                    method="POST"
+                    className="mt-4 grid gap-3 text-sm"
+                    onInput={(e) => {
+                      const form = e.currentTarget;
+                      const g = Number(form.gold_qty?.value || 0);
+                      const s = Number(form.silver_qty?.value || 0);
+                      const total = g * 110 + s * 80;
+                      const totalDisplay = form.querySelector("#alt-total");
+                      if (totalDisplay) totalDisplay.textContent = total > 0 ? `$${total}` : "$0";
+                    }}
+                  >
+                    <input type="hidden" name="type" value="Alt RSVP" />
 
-    <input
-      name="name"
-      required
-      className="border rounded-xl px-3 py-2"
-      placeholder="Your name"
-    />
-    <input
-      type="email"
-      name="email"
-      required
-      className="border rounded-xl px-3 py-2"
-      placeholder="Email"
-    />
+                    <input
+                      name="name"
+                      required
+                      className="border rounded-xl px-3 py-2"
+                      placeholder="Your name"
+                    />
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      className="border rounded-xl px-3 py-2"
+                      placeholder="Email"
+                    />
 
-    {/* Ticket quantities */}
-    <div className="grid gap-3 rounded-xl border p-3">
-      <div className="flex items-center justify-between gap-3">
-        <div className="min-w-0">
-          <div className="font-medium">Gold – $110</div>
-          <div className="text-zinc-500 text-xs">
-            Open bar, dinner, and donation included
-          </div>
-        </div>
-        <input
-          type="number"
-          name="gold_qty"
-          min={0}
-          defaultValue={0}
-          className="w-20 rounded-md border px-2 py-1 text-right"
-        />
-      </div>
+                    {/* Ticket quantities */}
+                    <div className="grid gap-3 rounded-xl border p-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0">
+                          <div className="font-medium">Gold – $110</div>
+                          <div className="text-zinc-500 text-xs">
+                            Open bar, dinner, and donation included
+                          </div>
+                        </div>
+                        <input
+                          type="number"
+                          name="gold_qty"
+                          min={0}
+                          defaultValue={0}
+                          className="w-20 rounded-md border px-2 py-1 text-right"
+                        />
+                      </div>
 
-      <div className="flex items-center justify-between gap-3">
-        <div className="min-w-0">
-          <div className="font-medium">Silver – $80</div>
-          <div className="text-zinc-500 text-xs">
-            Soft drinks, dinner, 5 raffle tickets, and donation
-          </div>
-        </div>
-        <input
-          type="number"
-          name="silver_qty"
-          min={0}
-          defaultValue={0}
-          className="w-20 rounded-md border px-2 py-1 text-right"
-        />
-      </div>
-    </div>
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0">
+                          <div className="font-medium">Silver – $80</div>
+                          <div className="text-zinc-500 text-xs">
+                            Soft drinks, dinner, 5 raffle tickets, and donation
+                          </div>
+                        </div>
+                        <input
+                          type="number"
+                          name="silver_qty"
+                          min={0}
+                          defaultValue={0}
+                          className="w-20 rounded-md border px-2 py-1 text-right"
+                        />
+                      </div>
+                    </div>
 
-    {/* Running total */}
-    <div className="text-right text-sm font-medium mt-1 text-zinc-700">
-      Total: <span id="alt-total">$0</span>
-    </div>
+                    {/* Running total */}
+                    <div className="text-right text-sm font-medium mt-1 text-zinc-700">
+                      Total: <span id="alt-total">$0</span>
+                    </div>
 
-    <label className="text-zinc-600 mt-2">How do you plan to pay?</label>
-    <select
-      name="payment_method"
-      className="border rounded-xl px-3 py-2"
-      defaultValue="Zelle"
-    >
-      <option>Zelle</option>
-      <option>Check</option>
-      <option>Cash</option>
-    </select>
+                    <label className="text-zinc-600 mt-2">How do you plan to pay?</label>
+                    <select
+                      name="payment_method"
+                      className="border rounded-xl px-3 py-2"
+                      defaultValue="Zelle"
+                    >
+                      <option>Zelle</option>
+                      <option>Check</option>
+                      <option>Cash</option>
+                    </select>
 
-    <p className="text-xs text-zinc-500">
-      Zelle to <b>631-804-2998</b>; for checks please make payable to{" "}
-      <b>Emma Benardos</b>.
-    </p>
+                    <p className="text-xs text-zinc-500">
+                      Zelle to <b>631-804-2998</b>; for checks please make payable to{" "}
+                      <b>Emma Benardos</b>.
+                    </p>
 
-    <button
-      type="submit"
-      className="rounded-2xl bg-zinc-900 text-white px-5 py-2 hover:bg-zinc-800"
-    >
-      Submit RSVP
-    </button>
-  </form>
-)}
+                    <button
+                      type="submit"
+                      className="rounded-2xl bg-zinc-900 text-white px-5 py-2 hover:bg-zinc-800"
+                    >
+                      Submit RSVP
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
           </div>
@@ -373,7 +376,7 @@ export default function EmmasElvesSite() {
       </section>
 
       {/* ====================== Raffle Baskets ====================== */}
-      <section id="raffles" className="py-16 border-t">
+      <section id="raffles" className="py-16 border-t scroll-mt-24 md:scroll-mt-28">
         <div className="mx-auto max-w-6xl px-4">
           <header className="mb-8 text-center">
             <h2 className="text-3xl font-bold tracking-tight">🎟️ Raffle Baskets 2025</h2>
@@ -383,6 +386,9 @@ export default function EmmasElvesSite() {
             </p>
             <p className="mt-2 text-sm text-zinc-500">
               Tickets are <b>$5 each</b>. Bundles: <b>10/$35</b> · <b>20/$60</b> · <b>40/$100</b>.
+            </p>
+            <p className="mt-2 text-sm text-zinc-500">
+              These are some of our raffles available for online ticket entries — we’ll keep updating as more donations come in.
             </p>
           </header>
 
@@ -603,15 +609,15 @@ function RaffleGrid() {
 
   // baskets: updated list
   const BASKETS = [
-    { id: "beach",   name: "🏖️ Beach Day", blurb: "Nalu, Bunger, and more beach essentials!" },
-    { id: "plane",   name: "🧑🏻‍✈️ Stearman Aircraft Ride", blurb: "Fly around Long Island in a World War II aircraft with Pilot Michael Cifelli." },
-    { id: "travel",  name: "🛫 Ben Djaha Travel", blurb: "Free travel planning for a 7-night vacation." },
-    { id: "danoi",   name: "🍝 Dinner at Da Noi", blurb: "$100 gift card." },
+    { id: "beach", name: "🏖️ Beach Day", blurb: "Nalu, Bunger, and more beach essentials!" },
+    { id: "plane", name: "🧑🏻‍✈️ Stearman Aircraft Ride", blurb: "Fly around Long Island in a World War II aircraft with Pilot Michael Cifelli." },
+    { id: "travel", name: "🛫 Ben Djaha Travel", blurb: "Free travel planning for a 7-night vacation." },
+    { id: "danoi", name: "🍝 Dinner at Da Noi", blurb: "$100 gift card." },
     { id: "tellers", name: "🥩 Dinner at Tellers", blurb: "$100 gift card." },
     { id: "jackson", name: "🍽️ Jackson Hall Feast", blurb: "$100 gift card." },
-    { id: "winter",  name: "🎿 Winter Sports", blurb: "Action Sports snow essentials." },
+    { id: "winter", name: "🎿 Winter Sports", blurb: "Action Sports snow essentials." },
     { id: "racines", name: "💇 Racine’s", blurb: "$100 gift card and hair styling essentials." },
-    { id: "rhc",     name: "🍏 Riverhead Ciderhouse Starter Pack", blurb: "RHC swag and more!" },
+    { id: "rhc", name: "🍏 Riverhead Ciderhouse Starter Pack", blurb: "RHC swag and more!" },
   ];
 
   // compute the cheapest total using bundles + unit tickets
