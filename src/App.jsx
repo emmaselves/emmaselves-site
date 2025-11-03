@@ -137,59 +137,113 @@ export default function EmmasElvesSite() {
                   }
 
                   return (
-                    <form
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                        const form = e.currentTarget;
-                        const data = new FormData(form);
+  <form
+    onSubmit={(e) => {
+      e.preventDefault();
+      const form = e.currentTarget;
+      const data = new FormData(form);
 
-                        const name = (data.get("name") || "").toString().trim();
-                        const email = (data.get("email") || "").toString().trim();
-                        const tierValue = (data.get("tier") || "gold").toString(); // 'gold' | 'silver'
-                        const tierLabel = tierValue === "gold" ? "Gold" : "Silver";
+      const name = (data.get("name") || "").toString().trim();
+      const email = (data.get("email") || "").toString().trim();
 
-                        const amount = tierValue === "gold" ? 110 : 80; // discounted online prices
-                        const note = `Emma's Elves - ${tierLabel} Ticket - ${name}`;
+      const goldQty = Number(data.get("gold_qty") || 0);
+      const silverQty = Number(data.get("silver_qty") || 0);
 
-                        // record RSVP
-                        fetch("https://formspree.io/f/xpwyvzbk", {
-                          method: "POST",
-                          headers: { Accept: "application/json" },
-                          body: data,
-                          keepalive: true,
-                        }).catch(() => {});
+      const GOLD = 110;
+      const SILVER = 80;
+      const amount = goldQty * GOLD + silverQty * SILVER;
 
-                        // open venmo
-                        openVenmo("emmas_elves", amount, note);
-                      }}
-                      className="mt-3 grid gap-3 text-sm"
-                    >
-                      <input name="name" required className="border rounded-xl px-3 py-2" placeholder="Your name" />
-                      <input type="email" name="email" required className="border rounded-xl px-3 py-2" placeholder="Email" />
+      const parts = [];
+      if (goldQty) parts.push(`${goldQty}×Gold`);
+      if (silverQty) parts.push(`${silverQty}×Silver`);
+      const detail = parts.length ? ` (${parts.join(" + ")})` : "";
+      const note = `Emma's Elves - RSVP${detail} - ${name}`;
 
-                      {/* Ticket choice */}
-                      <div className="grid gap-2 rounded-xl border p-3">
-                        <label className="flex items-center gap-2">
-                          <input type="radio" name="tier" value="gold" defaultChecked />
-                          <span className="font-medium">Gold – $110</span>
-                          <span className="text-zinc-500">(open bar, dinner, donation)</span>
-                        </label>
-                        <label className="flex items-center gap-2">
-                          <input type="radio" name="tier" value="silver" />
-                          <span className="font-medium">Silver – $80</span>
-                          <span className="text-zinc-500">(soft drinks, dinner, 5 raffle tix, donation)</span>
-                        </label>
-                      </div>
+      data.set("type", "RSVP & Pay");
+      data.set("gold_qty", goldQty);
+      data.set("silver_qty", silverQty);
+      data.set("amount", amount);
 
-                      <button type="submit" className="rounded-2xl bg-zinc-900 text-white px-5 py-2 hover:bg-zinc-800">
-                        RSVP & Pay via Venmo
-                      </button>
+      fetch("https://formspree.io/f/xpwyvzbk", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
+        keepalive: true,
+      }).catch(() => {});
 
-                      <p className="text-xs text-zinc-500">
-                        Prefer another way to pay? Use the option below for Zelle/Check/Cash.
-                      </p>
-                    </form>
-                  );
+      openVenmo("emmas_elves", amount, note);
+    }}
+    className="mt-3 grid gap-3 text-sm"
+  >
+    <input name="name" required className="border rounded-xl px-3 py-2" placeholder="Your name" />
+    <input type="email" name="email" required className="border rounded-xl px-3 py-2" placeholder="Email" />
+
+    {/* Quantities */}
+    <div className="grid gap-3 rounded-xl border p-3">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <div className="font-medium">Gold – $110</div>
+          <div className="text-zinc-500">open bar, dinner, donation</div>
+        </div>
+        <input
+          type="number"
+          name="gold_qty"
+          min={0}
+          defaultValue={0}
+          className="w-20 rounded-md border px-2 py-1 text-right"
+          onInput={(e) => {
+            const form = e.currentTarget.form;
+            const g = Number(form.gold_qty.value || 0);
+            const s = Number(form.silver_qty.value || 0);
+            const total = g * 110 + s * 80;
+            const btn = form.querySelector("#rsvp-total-btn");
+            btn.textContent =
+              total > 0
+                ? `RSVP & Pay $${total} via Venmo`
+                : "RSVP & Pay via Venmo";
+          }}
+        />
+      </div>
+
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <div className="font-medium">Silver – $80</div>
+          <div className="text-zinc-500">soft drinks, dinner, 5 raffle tix, donation</div>
+        </div>
+        <input
+          type="number"
+          name="silver_qty"
+          min={0}
+          defaultValue={0}
+          className="w-20 rounded-md border px-2 py-1 text-right"
+          onInput={(e) => {
+            const form = e.currentTarget.form;
+            const g = Number(form.gold_qty.value || 0);
+            const s = Number(form.silver_qty.value || 0);
+            const total = g * 110 + s * 80;
+            const btn = form.querySelector("#rsvp-total-btn");
+            btn.textContent =
+              total > 0
+                ? `RSVP & Pay $${total} via Venmo`
+                : "RSVP & Pay via Venmo";
+          }}
+        />
+      </div>
+    </div>
+
+    <button
+      id="rsvp-total-btn"
+      type="submit"
+      className="rounded-2xl bg-zinc-900 text-white px-5 py-2 hover:bg-zinc-800"
+    >
+      RSVP & Pay via Venmo
+    </button>
+
+    <p className="text-xs text-zinc-500">
+      Prefer another way to pay? Use the option below for Zelle/Check/Cash.
+    </p>
+  </form>
+);
                 })()}
               </div>
 
@@ -203,28 +257,99 @@ export default function EmmasElvesSite() {
                 </button>
 
                 {altRSVPOpen && (
-                  <form
-                    action="https://formspree.io/f/xpwyvzbk"
-                    method="POST"
-                    className="mt-4 grid gap-3 text-sm"
-                  >
-                    <input type="hidden" name="type" value="Alt RSVP" />
-                    <input name="name" required className="border rounded-xl px-3 py-2" placeholder="Your name" />
-                    <input type="email" name="email" required className="border rounded-xl px-3 py-2" placeholder="Email" />
-                    <label className="text-zinc-600">How do you plan to pay?</label>
-                    <select name="payment_method" className="border rounded-xl px-3 py-2" defaultValue="Zelle">
-                      <option>Zelle</option>
-                      <option>Check</option>
-                      <option>Cash</option>
-                    </select>
-                    <p className="text-xs text-zinc-500">
-                      Zelle to <b>631-804-2998</b>; for checks please make payable to <b>Emma Benardos</b>.
-                    </p>
-                    <button type="submit" className="rounded-2xl bg-zinc-900 text-white px-5 py-2 hover:bg-zinc-800">
-                      Submit RSVP
-                    </button>
-                  </form>
-                )}
+  <form
+    action="https://formspree.io/f/xpwyvzbk"
+    method="POST"
+    className="mt-4 grid gap-3 text-sm"
+    onInput={(e) => {
+      const form = e.currentTarget;
+      const g = Number(form.gold_qty?.value || 0);
+      const s = Number(form.silver_qty?.value || 0);
+      const total = g * 110 + s * 80;
+      const totalDisplay = form.querySelector("#alt-total");
+      if (totalDisplay) totalDisplay.textContent = total > 0 ? `$${total}` : "$0";
+    }}
+  >
+    <input type="hidden" name="type" value="Alt RSVP" />
+
+    <input
+      name="name"
+      required
+      className="border rounded-xl px-3 py-2"
+      placeholder="Your name"
+    />
+    <input
+      type="email"
+      name="email"
+      required
+      className="border rounded-xl px-3 py-2"
+      placeholder="Email"
+    />
+
+    {/* Ticket quantities */}
+    <div className="grid gap-3 rounded-xl border p-3">
+      <div className="flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <div className="font-medium">Gold – $110</div>
+          <div className="text-zinc-500 text-xs">
+            Open bar, dinner, and donation included
+          </div>
+        </div>
+        <input
+          type="number"
+          name="gold_qty"
+          min={0}
+          defaultValue={0}
+          className="w-20 rounded-md border px-2 py-1 text-right"
+        />
+      </div>
+
+      <div className="flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <div className="font-medium">Silver – $80</div>
+          <div className="text-zinc-500 text-xs">
+            Soft drinks, dinner, 5 raffle tickets, and donation
+          </div>
+        </div>
+        <input
+          type="number"
+          name="silver_qty"
+          min={0}
+          defaultValue={0}
+          className="w-20 rounded-md border px-2 py-1 text-right"
+        />
+      </div>
+    </div>
+
+    {/* Running total */}
+    <div className="text-right text-sm font-medium mt-1 text-zinc-700">
+      Total: <span id="alt-total">$0</span>
+    </div>
+
+    <label className="text-zinc-600 mt-2">How do you plan to pay?</label>
+    <select
+      name="payment_method"
+      className="border rounded-xl px-3 py-2"
+      defaultValue="Zelle"
+    >
+      <option>Zelle</option>
+      <option>Check</option>
+      <option>Cash</option>
+    </select>
+
+    <p className="text-xs text-zinc-500">
+      Zelle to <b>631-804-2998</b>; for checks please make payable to{" "}
+      <b>Emma Benardos</b>.
+    </p>
+
+    <button
+      type="submit"
+      className="rounded-2xl bg-zinc-900 text-white px-5 py-2 hover:bg-zinc-800"
+    >
+      Submit RSVP
+    </button>
+  </form>
+)}
               </div>
             </div>
           </div>
