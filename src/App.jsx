@@ -18,6 +18,10 @@ const [altGoldQty, setAltGoldQty] = useState(0);
 const [altSilverQty, setAltSilverQty] = useState(0);
 const altTotal = altGoldQty * GOLD_PRICE + altSilverQty * SILVER_PRICE;
 
+const [rsvpConfirmed, setRsvpConfirmed] = useState(false);
+const [showVenmoFallback, setShowVenmoFallback] = useState(false);
+
+
 
 
   return (
@@ -179,6 +183,14 @@ const altTotal = altGoldQty * GOLD_PRICE + altSilverQty * SILVER_PRICE;
                           keepalive: true,
                         }).catch(() => { });
 
+                        setRsvpConfirmed(true);                 // show “RSVP received” message
+                        setTimeout(() => {
+                          openVenmo("emmas_elves", amount, note);
+                          // If Venmo didn't take over in ~1.2s, show a manual link button.
+                          setTimeout(() => setShowVenmoFallback(true), 1200);
+                        }, 600);
+
+
                         openVenmo("emmas_elves", totalRSVP, note);
                       }}
                       className="mt-3 grid gap-3 text-sm"
@@ -255,15 +267,34 @@ const altTotal = altGoldQty * GOLD_PRICE + altSilverQty * SILVER_PRICE;
                       <button
                         type="submit"
                         disabled={totalRSVP <= 0}
-                        className={`rounded-2xl px-5 py-2 text-white hover:bg-zinc-800 ${totalRSVP > 0 ? "bg-zinc-900" : "bg-zinc-300 cursor-not-allowed"
+                        className={`rounded-2xl px-5 py-2 text-white ${totalRSVP > 0
+                            ? "bg-zinc-900 hover:bg-zinc-800"
+                            : "bg-zinc-400 cursor-not-allowed"
                           }`}
                       >
-                        {totalRSVP > 0 ? `RSVP & Pay $${totalRSVP} via Venmo` : "Select tickets to continue"}
+                        {totalRSVP > 0 ? `RSVP & Pay $${totalRSVP}` : "RSVP & Pay via Venmo"}
                       </button>
+
+                      {rsvpConfirmed && (
+                        <p className="mt-2 text-sm text-emerald-700">
+                          ✅ RSVP received! Redirecting you to Venmo to complete payment…
+                        </p>
+                      )}
+
+                      {showVenmoFallback && (
+                        <button
+                          type="button"
+                          onClick={() => openVenmo("emmas_elves", totalRSVP, note)}
+                          className="mt-2 inline-flex items-center rounded-xl border px-3 py-2 text-sm hover:bg-zinc-50"
+                        >
+                          Venmo didn’t open? Tap to pay
+                        </button>
+                      )}
 
                       <p className="text-xs text-zinc-500">
                         Prefer another way to pay? Use the option below for Zelle/Check/Cash.
                       </p>
+
                     </form>
                   );
                 })()}
