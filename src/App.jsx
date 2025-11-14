@@ -17,6 +17,12 @@ const totalRSVP = goldQty * GOLD_PRICE + silverQty * SILVER_PRICE;
 const [altGoldQty, setAltGoldQty] = useState(0);
 const [altSilverQty, setAltSilverQty] = useState(0);
 const altTotal = altGoldQty * GOLD_PRICE + altSilverQty * SILVER_PRICE;
+const altTicketCount = altGoldQty + altSilverQty;
+const altTicketTypes = [
+  ...Array(altGoldQty).fill("Gold"),
+  ...Array(altSilverQty).fill("Silver"),
+];
+
 
 const [rsvpConfirmed, setRsvpConfirmed] = useState(false);
 const [showVenmoFallback, setShowVenmoFallback] = useState(false);
@@ -156,6 +162,14 @@ const [showVenmoFallback, setShowVenmoFallback] = useState(false);
         if (Date.now() - t < 1200) window.location.href = web;
       }, 800);
     }
+                  const ticketCount = goldQty + silverQty; // NEW
+
+                  const ticketTypes = [
+                    ...Array(goldQty).fill("Gold"),
+                    ...Array(silverQty).fill("Silver")
+                  ];
+
+
 
                   return (
                     <form
@@ -183,15 +197,17 @@ const [showVenmoFallback, setShowVenmoFallback] = useState(false);
                           keepalive: true,
                         }).catch(() => { });
 
-                        setRsvpConfirmed(true);                 // show “RSVP received” message
+                        setRsvpConfirmed(true); // show “RSVP received” message
+
                         setTimeout(() => {
-                          openVenmo("emmas_elves", amount, note);
+                          openVenmo("emmas_elves", totalRSVP, note);
                           // If Venmo didn't take over in ~1.2s, show a manual link button.
                           setTimeout(() => setShowVenmoFallback(true), 1200);
                         }, 600);
 
 
-                        openVenmo("emmas_elves", totalRSVP, note);
+
+                      
                       }}
                       className="mt-3 grid gap-3 text-sm"
                     >
@@ -257,6 +273,27 @@ const [showVenmoFallback, setShowVenmoFallback] = useState(false);
                           </div>
                         </div>
                       </div>
+
+                      {/* Dynamic guest fields */}
+                      {ticketCount > 0 && (
+                        <div className="mt-3 rounded-xl border p-3">
+                          <div className="text-sm font-semibold">Guest Names</div>
+                          <p className="mt-1 text-xs text-zinc-500">
+                            Please list the name for each ticket you're purchasing.
+                          </p>
+
+                          {ticketTypes.map((type, index) => (
+                            <input
+                              key={index}
+                              name={`guest_names[${index}]`}
+                              className="mt-2 w-full border rounded-xl px-3 py-2 text-sm"
+                              placeholder={`Guest ${index + 1} (${type})`}
+                            />
+                          ))}
+                        </div>
+                      )}
+
+
 
                       {/* total + button */}
                       <div className="mt-1 flex items-center justify-between text-sm">
@@ -374,6 +411,26 @@ const [showVenmoFallback, setShowVenmoFallback] = useState(false);
                         </div>
                       </div>
                     </div>
+
+                    {/* Dynamic guest fields for alt RSVP */}
+                    {altTicketCount > 0 && (
+                      <div className="mt-3 rounded-xl border p-3">
+                        <div className="text-sm font-semibold">Guest Names</div>
+                        <p className="mt-1 text-xs text-zinc-500">
+                          Please list the name for each ticket you're reserving.
+                        </p>
+
+                        {altTicketTypes.map((type, index) => (
+                          <input
+                            key={index}
+                            name={`guest_names_alt[${index}]`}
+                            className="mt-2 w-full border rounded-xl px-3 py-2 text-sm"
+                            placeholder={`Guest ${index + 1} (${type})`}
+                          />
+                        ))}
+                      </div>
+                    )}
+
 
                     {/* total preview only */}
                     <div className="mt-1 flex items-center justify-between text-sm">
