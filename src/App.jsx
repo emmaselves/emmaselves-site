@@ -711,14 +711,18 @@ function RaffleGrid() {
 
   // baskets: updated list
   const BASKETS = [
-    { id: "beach", name: "🏖️ Beach Day", blurb: "Nalu, Bunger, and more beach essentials!" },
+    { id: "beach", name: "🏖️ Bunger Fun", blurb: "Bunger cruiser board and Bunger swag" },
     { id: "plane", name: "🧑🏻‍✈️ Stearman Aircraft Ride", blurb: "Fly around Long Island in a World War II aircraft with Pilot Michael Cifelli." },
     { id: "travel", name: "🛫 Ben Djaha Travel", blurb: "Free travel planning for a 7-night vacation." },
-   // { id: "danoi", name: "🍝 Dinner at Da Noi", blurb: "$100 gift card." },
-    //{ id: "tellers", name: "🥩 Dinner at Tellers", blurb: "$100 gift card." },
+    { id: "danoi", name: "🍝 Dinner at Da Noi", blurb: "$100 gift card." },
+    { id: "tellers", name: "🥩 Dinner at Tellers", blurb: "$100 gift card." },
     { id: "jackson", name: "🍽️ Jackson Hall Feast", blurb: "$100 gift card." },
     { id: "winter", name: "🎿 Winter Sports", blurb: "Action Sports snow essentials." },
     { id: "racines", name: "💇 Racine’s", blurb: "$100 gift card and hair styling essentials." },
+    { id: "cvh", name: "Costa Verde Hospitality", blurb: "$25 giftcards to Coastal, Sweet Jane, and Verde, and a Coastal Trucker Hat" },
+    { id: "bms", name: "💇 Glam and Go", blurb: "Beauty Mark Spa & Bridal Studio - hair and makeup" },
+    { id: "dje", name: "Tunes with DJ Eric", blurb: "$100 off a booking with DJ Eric" },
+    { id: "bcm", name: "Dinner & Drinkns at Bar Clementine", blurb: "$100 gift card" },
     { id: "rhc", name: "🍏 Riverhead Ciderhouse Starter Pack", blurb: "RHC swag and more!" },
   ];
 
