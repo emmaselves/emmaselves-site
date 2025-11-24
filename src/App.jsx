@@ -722,7 +722,7 @@ function RaffleGrid() {
     { id: "cvh", name: "Costa Verde Hospitality", blurb: "$25 giftcards to Coastal, Sweet Jane, and Verde, and a Coastal Trucker Hat" },
     { id: "bms", name: "💇 Glam and Go", blurb: "Beauty Mark Spa & Bridal Studio - hair and makeup" },
     { id: "dje", name: "Tunes with DJ Eric", blurb: "$100 off a booking with DJ Eric" },
-    { id: "bcm", name: "Dinner & Drinkns at Bar Clementine", blurb: "$100 gift card" },
+    { id: "bcm", name: "Dinner & Drinks at Bar Clementine", blurb: "$100 gift card" },
     { id: "rhc", name: "🍏 Riverhead Ciderhouse Starter Pack", blurb: "RHC swag and more!" },
   ];
 
